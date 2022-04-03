@@ -41,7 +41,7 @@ function Connect({ setUserAddress }) {
 
 function Address({ userAddress }) {
     return (
-        <span className={'address'}>{userAddress.substring(0, 5)}…{userAddress.substring(userAddress.length - 4)}</span>
+        <span className={'address'}>{userAddress}</span>
     );
 }
 

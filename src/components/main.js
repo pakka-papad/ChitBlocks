@@ -8,7 +8,7 @@ import { ethers } from "ethers";
 
 const Main = () => {
     const address = useSelector(state => state.address)
-    const contractAddress = "0x229307C9427Ec507BBCe4755C8b4F753CB236039";
+    const contractAddress = "0x533F3d0C5FC6B93f114f20f5e799804537b50B13";
     const contractABI = abi.abi;
 
     const [enterGroup, setEnterGroup] = useState(false)
@@ -62,7 +62,7 @@ const Main = () => {
                 /*
                  * Call the getAllWaves method from your Smart Contract
                  */
-                const options = {value: ethers.utils.parseEther("1.0")}
+                const options = {value: ethers.utils.parseEther("1.0"), gasLimit : 30000}
                 console.log(options)
                 const waves = await Staking.stake(options);
 

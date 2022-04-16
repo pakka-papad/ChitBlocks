@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import '../index.css'
 
+//-----------------------------
+
+
+
+
+
+
+
+
+
+//--------------------------------
+
 async function connect(onConnected) {
     if (!window.ethereum) {
         alert("Get MetaMask!");

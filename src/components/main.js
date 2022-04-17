@@ -1,14 +1,15 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import WalletCardEthers from './WalletCardEthers'
 import { useSelector } from 'react-redux';
 import ChooseScheme from './chooseScheme';
 import abi from "../utils/WavePortal.json";
 import { ethers } from "ethers";
+import io from 
 
 
 const Main = () => {
     const address = useSelector(state => state.address)
-    const contractAddress = "0x533F3d0C5FC6B93f114f20f5e799804537b50B13";
+    const contractAddress = "0x74bABFdbFF5020682597bA78FEdDCBc5Ff0044D3";
     const contractABI = abi.abi;
 
     const [enterGroup, setEnterGroup] = useState(false)
@@ -30,13 +31,13 @@ const Main = () => {
 
                 setEnterGroup(true)
 
-                
+
 
                 /*
                  * We only need address, timestamp, and message in our UI so let's
                  * pick those out
                  */
-               
+
 
                 /*
                  * Store our data in React State
@@ -62,16 +63,16 @@ const Main = () => {
                 /*
                  * Call the getAllWaves method from your Smart Contract
                  */
-                const options = {value: ethers.utils.parseEther("1.0"), gasLimit : 30000}
+                const options = { value: ethers.utils.parseEther("0.001"), gasLimit: 30000 }
                 console.log(options)
                 const waves = await Staking.stake(options);
 
-
+                setIsPaid(true)
                 /*
                  * We only need address, timestamp, and message in our UI so let's
                  * pick those out
                  */
-               
+
 
                 /*
                  * Store our data in React State
@@ -86,16 +87,33 @@ const Main = () => {
 
 
 
+    const NavBar = () => {
+        return (
+            <div className={'navbar'}>
+                ChitBlocks
+            </div>
+        )
+    }
 
+    const auction = () => {
 
+    }
 
     return (
-        <div>
-            <WalletCardEthers />
-            {address && <ChooseScheme />}
-            <button onClick={enter}>Enter</button>
-            {enterGroup && <button onClick={stake}>Pay</button>}
-        </div>
+        <>
+            <NavBar />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <WalletCardEthers />
+                {address && <ChooseScheme />}
+                {!enterGroup && <button className={'button0enter'} onClick={enter}>Enter</button>}
+                <div>
+                    {enterGroup && !isPaid && <button className={'button0pay'} onClick={stake}>Pay</button>}
+                </div>
+                <div>
+                    {isPaid && <button className={'button0pay'} onClick={auction}>Go to Live Auction</button>}
+                </div>
+            </div>
+        </>
     )
 }
 
